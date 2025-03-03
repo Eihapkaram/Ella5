@@ -25,9 +25,11 @@
           class="icon-shipping-truck"
           :style="`position: absolute; left:calc(${
             this.total.length == 0
-              ? 5.6
-              : this.total[this.total.length - 1] / 10 >= 100
-              ? 100
+              ? 5.3
+              : this.total[this.total.length - 1] / 10 <= 5
+              ? this.total[this.total.length - 1] / 10 + 5
+              : this.total[this.total.length - 1] / 10 >= 0
+              ? this.total[this.total.length - 1] / 10 + 5
               : this.total[this.total.length - 1] / 10
           }% - 30px);transition:all,0.3s;top:-17px;`"
           viewBox="0 0 40.55 24"
@@ -68,10 +70,12 @@
           style="z-index: 5"
           :model-value="`${
             this.total.length == 0
-              ? 5.6
+              ? 5.3
+              : this.total[this.total.length - 1] / 10 <= 5
+              ? this.total[this.total.length - 1] / 10 + 5
               : this.total[this.total.length - 1] / 10 >= 0
-              ? this.total[this.total.length - 1] / 10
-              : ''
+              ? this.total[this.total.length - 1] / 10 + 5
+              : this.total[this.total.length - 1] / 10
           }`"
           striped
         ></v-progress-linear>
