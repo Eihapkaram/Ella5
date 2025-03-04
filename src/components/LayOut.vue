@@ -161,7 +161,9 @@
               width="30px"
               class="icon-shipping-truck"
               :style="`position: absolute; left:calc(${
-                this.total.length == 0
+                this.total[this.total.length - 1] > 950
+                  ? 100
+                  : this.total.length == 0
                   ? 5
                   : this.total[this.total.length - 1] / 10 <= 5
                   ? this.total[this.total.length - 1] / 10 + 5
@@ -205,7 +207,9 @@
               height="10"
               style="z-index: 5"
               :model-value="
-                this.total.length == 0
+                this.total[this.total.length - 1] > 950
+                  ? 100
+                  : this.total.length == 0
                   ? 5
                   : this.total[this.total.length - 1] / 10 <= 5
                   ? this.total[this.total.length - 1] / 10 + 5
