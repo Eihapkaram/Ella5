@@ -149,9 +149,14 @@
                       class="bg-black"
                       id="btnadd"
                       variant="outline"
-                      prepend-icon="mdi-cart"
-                      >Add to cart</v-btn
-                    >
+                      ><span id="addtext">
+                        <v-icon>mdi-cart</v-icon> Add to cart</span
+                      >
+                      <v-progress-circular
+                        v-if="progrssbtn"
+                        indeterminate
+                      ></v-progress-circular
+                    ></v-btn>
                     <span id="listicon">
                       <v-btn
                         ripple
@@ -385,6 +390,7 @@ export default {
       diloge: false,
       SingleProduct: "",
       tab: "",
+      progrssbtn: false,
     };
   },
   setup() {
@@ -400,6 +406,8 @@ export default {
     Add(item) {
       this.SingleProduct.quantity = this.quint;
       this.Additem(item);
+      window.addtext.style.display = "none";
+      this.progrssbtn = true;
     },
     Addtolist(item) {
       this.SingleProduct.quantity = this.quint;
