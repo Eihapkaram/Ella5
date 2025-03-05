@@ -116,13 +116,18 @@
                 <br />
                 <span class="d-flex">
                   <v-btn
-                    @click="this.Add(this.SingleProduct)"
+                    @click="this.Add(this.SingleProduct), (this.quint = 1)"
                     class="bg-black"
                     id="btnadd"
                     variant="outline"
-                    prepend-icon="mdi-cart"
-                    >Add to cart</v-btn
-                  >
+                    ><span id="addtext">
+                      <v-icon>mdi-cart</v-icon> Add to cart</span
+                    >
+                    <v-progress-circular
+                      v-if="progrssbtn"
+                      indeterminate
+                    ></v-progress-circular
+                  ></v-btn>
                   <span id="listicon">
                     <v-btn
                       ripple
@@ -165,6 +170,30 @@
 #zcon {
   position: relative;
   top: -180px;
+}
+#qointcon {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  left: -300px;
+}
+#qountbtn {
+  position: relative;
+  height: 50px;
+  left: 0px;
+  border-radius: 30px;
+  border: 2px solid black;
+  width: 150px;
+}
+#plus {
+  position: relative;
+  left: -40px;
+  z-index: 3;
+}
+#munse {
+  position: relative;
+  left: 40px;
+  z-index: 3;
 }
 /*/desktop/*/
 @media (max-width: 1366px) {
@@ -287,6 +316,7 @@ export default {
     return {
       quint: 1,
       iconcolor: "red",
+      progrssbtn: false,
     };
   },
   setup() {
@@ -302,6 +332,8 @@ export default {
     Add(item) {
       this.SingleProduct.quantity = this.quint;
       this.Additem(item);
+      window.addtext.style.display = "none";
+      this.progrssbtn = true;
     },
     Addtolist(item) {
       this.SingleProduct.quantity = this.quint;
