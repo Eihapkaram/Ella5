@@ -1,6 +1,10 @@
 <template>
-  <v-progress-linear color="blue" indeterminate v-if="load"></v-progress-linear>
   <v-row id="con" class="d-flex flex-row">
+    <v-progress-linear
+      color="blue"
+      indeterminate
+      v-if="load"
+    ></v-progress-linear>
     <v-col cols="12"
       ><h2>{{ this.$route.params.catigory }}</h2></v-col
     >
