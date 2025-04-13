@@ -77,21 +77,6 @@
               <span><v-text-h6>Lists</v-text-h6></span>
             </div>
           </v-app-bar-nav-icon>
-          <v-app-bar-nav-icon class="gropicon-textsearch" id="gropicon-text">
-            <div @click="openSearch()" id="nav-icon-text">
-              <v-icon
-                style="
-                  border-radius: 30px;
-                  background-color: rgb(224, 224, 224);
-                  padding: 20px;
-                "
-                size="30px"
-                id="gropiconsearch"
-                ripple
-                >mdi-magnify</v-icon
-              >
-            </div>
-          </v-app-bar-nav-icon>
         </v-col>
       </v-row>
     </v-container>
@@ -293,7 +278,7 @@ a {
     width: 193px;
   }
   #icons {
-    left: 3rem;
+    left: 4rem;
   }
   #searshcol {
     display: none;
