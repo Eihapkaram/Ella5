@@ -97,6 +97,33 @@
             </span>
           </v-col>
         </v-col>
+        <v-row style="margin-block-end: 10px">
+          <span style="position: relative">
+            <v-form
+              id="formsearch"
+              style="display: flex; gap: 10px"
+              class="justfiy-center align-center"
+              @submit.prevent="this.Search(this.searchvalue)"
+            >
+              <v-icon
+                @click="this.Search(this.searchvalue)"
+                style="position: absolute"
+                ripple
+                color="black"
+                id="iconsearchdrawer"
+                >mdi-magnify</v-icon
+              >
+              <input
+                id="searchinputforderwer"
+                style="outline: none"
+                class=""
+                type="search"
+                placeholder="search"
+                v-model="this.searchvalue"
+              />
+            </v-form>
+          </span>
+        </v-row>
       </v-row>
       <v-list style="display: block">
         <label for="lin"
@@ -330,55 +357,6 @@
             >view cart</v-btn
           >
         </v-div>
-      </v-container>
-    </v-navigation-drawer>
-
-    <v-navigation-drawer
-      id="drowerSearch"
-      width="500"
-      location="right"
-      v-model="drawerSearch"
-    >
-      <v-container>
-        <v-row justify="center">
-          <header>
-            <h3>search in ella</h3>
-          </header>
-        </v-row>
-        <v-row justify="center">
-          <span style="position: relative">
-            <v-form
-              id="formsearch"
-              style="display: flex; gap: 10px"
-              class="justfiy-center align-center"
-              @submit.prevent="this.Search(this.searchvalue)"
-            >
-              <v-icon
-                @click="this.Search(this.searchvalue)"
-                style="position: absolute"
-                ripple
-                color="black"
-                id="iconsearchdrawer"
-                >mdi-magnify</v-icon
-              >
-              <input
-                id="searchinputforderwer"
-                style="outline: none"
-                class=""
-                type="search"
-                placeholder="search"
-                v-model="this.searchvalue"
-              />
-              <v-btn
-                id="btn-closeserchderwoer"
-                style=""
-                elevation="outline"
-                @click="this.drawerSearch = false"
-                >cancel</v-btn
-              >
-            </v-form>
-          </span>
-        </v-row>
       </v-container>
     </v-navigation-drawer>
     <v-app-bar
@@ -1137,7 +1115,7 @@ div.v-table__wrapper {
   }
 
   #langhelp1 {
-    left: 50px;
+    left: 100px;
     position: relative;
   }
   #langhelp {
@@ -1161,8 +1139,10 @@ div.v-table__wrapper {
 
   #searchinputforderwer {
     position: relative;
-    left: 0.5rem;
+    left: 3rem;
     background-color: azure;
+
+    width: 200px;
   }
 
   #iconsearch2 {
@@ -1181,7 +1161,7 @@ div.v-table__wrapper {
   }
   #iconsearchdrawer {
     position: relative;
-    left: 270px;
+    left: 200px;
     top: 20px;
     z-index: 5;
     cursor: pointer;
