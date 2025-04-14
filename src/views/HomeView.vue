@@ -1,25 +1,31 @@
 <template>
-  <div class="home">
-    <BannerSlider />
-    <SectionSLide />
-    <OFeerSection />
-    <SlideCards1 @dilog="viwediloge($event)" />
-    <sectionOf />
-    <TopCatogery />
-    <NewProduct />
-    <ServeCards />
-    <TopMobil />
-    <AccessoriesSection />
-    <SportesTools />
-    <ClothesSection />
-    <TopsSc />
-    <BannerSec2 />
-    <ShozeSec />
-    <Watch2Sc />
-    <WatchSec />
-    <FooterBanner />
-    <FooterSction />
-  </div>
+  <v-lazy
+    :min-height="200"
+    :options="{ threshold: 0.5 }"
+    transition="fade-transition"
+  >
+    <div class="home">
+      <BannerSlider />
+      <SectionSLide />
+      <OFeerSection />
+      <SlideCards1 @dilog="viwediloge($event)" />
+      <sectionOf />
+      <TopCatogery />
+      <NewProduct />
+      <ServeCards />
+      <TopMobil />
+      <AccessoriesSection />
+      <SportesTools />
+      <ClothesSection />
+      <TopsSc />
+      <BannerSec2 />
+      <ShozeSec />
+      <Watch2Sc />
+      <WatchSec />
+      <FooterBanner />
+      <FooterSction />
+    </div>
+  </v-lazy>
 </template>
 
 <script>
