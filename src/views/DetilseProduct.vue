@@ -1,151 +1,157 @@
 <template>
-  <div id="zcon">
-    <v-row>
-      <v-col cols="12" lg="6" md="6" sm="12">
-        <div>
-          <img
-            id="big-img"
-            height="400px"
-            :src="this.SingleProduct.thumbnail"
-          />
-          <swiper
-            :scrollbar="{
-              hide: true,
-            }"
-            :pagination="{
-              clickable: true,
-            }"
-            :navigation="true"
-            :mousewheel="true"
-            :keyboard="true"
-            :slides-per-view="2"
-            :spaceBetween="3"
-            :modules="modules"
-            class="mySwiper"
-          >
-            <swiper-slide
-              id="swip"
-              v-for="(pro, index) in this.SingleProduct.images"
-              :key="index"
-            >
-              <v-card id="my-gallery" width="400" height="300px">
-                <img id="my-galleryimg" width="200px" :src="pro" />
-              </v-card>
-            </swiper-slide>
-          </swiper>
-        </div>
-      </v-col>
-      <v-col cols="12" lg="6" md="12" sm="12" id="c2">
-        <div id="con2">
+  <v-lazy
+    :min-height="200"
+    :options="{ threshold: 0.5 }"
+    transition="fade-transition"
+  >
+    <div id="zcon">
+      <v-row>
+        <v-col cols="12" lg="6" md="6" sm="12">
           <div>
-            <br />
+            <img
+              id="big-img"
+              height="400px"
+              :src="this.SingleProduct.thumbnail"
+            />
+            <swiper
+              :scrollbar="{
+                hide: true,
+              }"
+              :pagination="{
+                clickable: true,
+              }"
+              :navigation="true"
+              :mousewheel="true"
+              :keyboard="true"
+              :slides-per-view="2"
+              :spaceBetween="3"
+              :modules="modules"
+              class="mySwiper"
+            >
+              <swiper-slide
+                id="swip"
+                v-for="(pro, index) in this.SingleProduct.images"
+                :key="index"
+              >
+                <v-card id="my-gallery" width="400" height="300px">
+                  <img id="my-galleryimg" width="200px" :src="pro" />
+                </v-card>
+              </swiper-slide>
+            </swiper>
+          </div>
+        </v-col>
+        <v-col cols="12" lg="6" md="12" sm="12" id="c2">
+          <div id="con2">
             <div>
-              <v-card-title id="titl" class="d-flex">{{
-                this.SingleProduct.title
-              }}</v-card-title>
-              <div class="d-flex">
-                <span class="mr-3">reviews :</span>
-                <v-rating
-                  v-model="this.SingleProduct.rating"
-                  ripple
-                  readonly
-                  :length="5"
-                  :size="20"
-                  active-color="orange"
-                  class="d-flex"
-                />
-                <span class="ml-5"
-                  >category : {{ this.SingleProduct.category }}</span
-                >
-              </div>
-              <v-card-text class="text-subtitle-1 d-flex">{{
-                this.SingleProduct.description
-              }}</v-card-text>
-              <v-divider></v-divider>
-              <div id="ditealtdiv" class="d-flex flex-column">
-                <span class="d-flex"
-                  >brand : {{ this.SingleProduct.brand }} </span
-                ><span v-if="this.SingleProduct.dimensions">
+              <br />
+              <div>
+                <v-card-title id="titl" class="d-flex">{{
+                  this.SingleProduct.title
+                }}</v-card-title>
+                <div class="d-flex">
+                  <span class="mr-3">reviews :</span>
+                  <v-rating
+                    v-model="this.SingleProduct.rating"
+                    ripple
+                    readonly
+                    :length="5"
+                    :size="20"
+                    active-color="orange"
+                    class="d-flex"
+                  />
+                  <span class="ml-5"
+                    >category : {{ this.SingleProduct.category }}</span
+                  >
+                </div>
+                <v-card-text class="text-subtitle-1 d-flex">{{
+                  this.SingleProduct.description
+                }}</v-card-text>
+                <v-divider></v-divider>
+                <div id="ditealtdiv" class="d-flex flex-column">
                   <span class="d-flex"
-                    >width : {{ this.SingleProduct.dimensions.width }}
+                    >brand : {{ this.SingleProduct.brand }} </span
+                  ><span v-if="this.SingleProduct.dimensions">
+                    <span class="d-flex"
+                      >width : {{ this.SingleProduct.dimensions.width }}
+                    </span>
+                    <span class="d-flex"
+                      >height : {{ this.SingleProduct.dimensions.height }}
+                    </span>
+                    <span class="d-flex"
+                      >depth : {{ this.SingleProduct.dimensions.depth }}
+                    </span>
                   </span>
-                  <span class="d-flex"
-                    >height : {{ this.SingleProduct.dimensions.height }}
-                  </span>
-                  <span class="d-flex"
-                    >depth : {{ this.SingleProduct.dimensions.depth }}
-                  </span>
-                </span>
 
-                <span style="color: brown" class="text-subtitle-1 d-flex">
-                  returnPolicy : {{ this.SingleProduct.returnPolicy }}</span
-                >
-                <span class="text-subtitle-1 d-flex"
-                  >sku : {{ this.SingleProduct.sku }}</span
-                >
-                <span class="text-h6 text-bold d-flex" style="color: red"
-                  >price : {{ this.SingleProduct.price }} $
-                </span>
-                <span class="text-subtitle-1 d-flex"
-                  >availability : {{ this.SingleProduct.availabilityStatus }}
-                </span>
-                <span style="color: red">
-                  please hurry! only {{ this.SingleProduct.stock }} in stock
-                  <v-progress-linear
-                    color="deep-orange"
-                    height="10"
-                    :model-value="this.SingleProduct.stock"
-                    striped
-                  ></v-progress-linear>
-                </span>
-                <br />
-                <span id="qointcon">
-                  <span class="text-h5">Quantity : </span>
-                  <span>
-                    <v-icon @click="muns()" id="munse">mdi-minus</v-icon>
-                    <input id="qountbtn" type="button" :value="this.quint" />
-                    <v-icon @click="this.quint++" id="plus">mdi-plus</v-icon>
+                  <span style="color: brown" class="text-subtitle-1 d-flex">
+                    returnPolicy : {{ this.SingleProduct.returnPolicy }}</span
+                  >
+                  <span class="text-subtitle-1 d-flex"
+                    >sku : {{ this.SingleProduct.sku }}</span
+                  >
+                  <span class="text-h6 text-bold d-flex" style="color: red"
+                    >price : {{ this.SingleProduct.price }} $
                   </span>
-                  <span class="text-subtitle-2"
-                    >Subtotal :{{
-                      Math.ceil(this.SingleProduct.price) * this.quint
-                    }}
-                    $
+                  <span class="text-subtitle-1 d-flex"
+                    >availability : {{ this.SingleProduct.availabilityStatus }}
                   </span>
-                </span>
-                <br />
-                <span class="d-flex">
-                  <v-btn
-                    @click="this.Add(this.SingleProduct), (this.quint = 1)"
-                    class="bg-black"
-                    id="btnadd"
-                    variant="outline"
-                    ><span id="addtext">
-                      <v-icon>mdi-cart</v-icon> Add to cart</span
-                    >
-                    <v-progress-circular
-                      v-if="progrssbtn"
-                      indeterminate
-                    ></v-progress-circular
-                  ></v-btn>
-                  <span id="listicon">
+                  <span style="color: red">
+                    please hurry! only {{ this.SingleProduct.stock }} in stock
+                    <v-progress-linear
+                      color="deep-orange"
+                      height="10"
+                      :model-value="this.SingleProduct.stock"
+                      striped
+                    ></v-progress-linear>
+                  </span>
+                  <br />
+                  <span id="qointcon">
+                    <span class="text-h5">Quantity : </span>
+                    <span>
+                      <v-icon @click="muns()" id="munse">mdi-minus</v-icon>
+                      <input id="qountbtn" type="button" :value="this.quint" />
+                      <v-icon @click="this.quint++" id="plus">mdi-plus</v-icon>
+                    </span>
+                    <span class="text-subtitle-2"
+                      >Subtotal :{{
+                        Math.ceil(this.SingleProduct.price) * this.quint
+                      }}
+                      $
+                    </span>
+                  </span>
+                  <br />
+                  <span class="d-flex">
                     <v-btn
-                      ripple
-                      size="60"
-                      id="iconlist"
-                      rounded="true"
-                      icon="mdi-heart"
-                      @click="this.Addtolist(this.SingleProduct)"
+                      @click="this.Add(this.SingleProduct), (this.quint = 1)"
+                      class="bg-black"
+                      id="btnadd"
+                      variant="outline"
+                      ><span id="addtext">
+                        <v-icon>mdi-cart</v-icon> Add to cart</span
+                      >
+                      <v-progress-circular
+                        v-if="progrssbtn"
+                        indeterminate
+                      ></v-progress-circular
                     ></v-btn>
+                    <span id="listicon">
+                      <v-btn
+                        ripple
+                        size="60"
+                        id="iconlist"
+                        rounded="true"
+                        icon="mdi-heart"
+                        @click="this.Addtolist(this.SingleProduct)"
+                      ></v-btn>
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </v-col>
-    </v-row>
-  </div>
+        </v-col>
+      </v-row>
+    </div>
+  </v-lazy>
 </template>
 <style scoped>
 #titl {
