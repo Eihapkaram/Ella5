@@ -1,97 +1,141 @@
 <template>
   <v-app-bar
     id="nav1"
-    style="position: fixed; top: 0px"
+    style="position: fixed; top: 0; z-index: 10"
     height="100"
     width="100%"
-    class="bg-white"
+    class="bg-white shadow-sm"
   >
     <v-container fluid>
-      <v-row id="" class="d-flex justify-space-around">
+      <v-row class="d-flex justify-space-around align-center">
+        <!-- شعار الموقع -->
         <v-col cols="3" md="3">
           <v-list nav id="logop">
-            <v-list-item>
-              <img
-                @click="this.$router.push({ name: 'home' })"
-                id="logo"
-                src="@/assets/images/footer-logo.webp"
-              />
+            <v-list-item
+              style="display: flex; align-items: center; cursor: pointer"
+              @click="$router.push({ name: 'home' })"
+            >
+              <v-icon size="36" color="#c79a00" style="margin-left: 8px">
+                mdi-package-variant-closed
+              </v-icon>
+              <h2
+                style="
+                  font-family: 'Cairo', sans-serif;
+                  color: #c79a00;
+                  font-weight: 800;
+                  font-size: 24px;
+                  margin: 0;
+                "
+              >
+                جُمّلة الجُمّلة
+              </h2>
             </v-list-item>
           </v-list>
         </v-col>
+
+        <!-- مربع البحث -->
         <v-col cols="3" id="searshcol">
           <span style="position: relative">
-            <v-form @submit.prevent="this.Search(this.searchvalue)">
+            <v-form @submit.prevent="Search(searchvalue)">
               <input
                 id="searchinput"
-                style="outline: none; background-color: rgb(224, 224, 224)"
-                class=""
+                style="
+                  outline: none;
+                  background-color: rgb(240, 240, 240);
+                  border-radius: 30px;
+                  padding: 10px 15px;
+                  width: 100%;
+                  border: 1px solid #ccc;
+                  text-align: right;
+                "
                 type="search"
-                placeholder="search"
-                v-model="this.searchvalue"
-              /><v-icon
-                @click="this.Search(this.searchvalue)"
-                style="position: absolute"
-                ripple
-                color="black"
-                id="iconsearch"
-                >mdi-magnify</v-icon
-              >
+                placeholder="ابحث عن منتج..."
+                v-model="searchvalue"
+              />
+              <img
+                @click="Search(searchvalue)"
+                src="https://cdn-icons-png.flaticon.com/512/622/622669.png"
+                width="22"
+                height="22"
+                style="
+                  position: absolute;
+                  top: 12px;
+                  left: 15px;
+                  cursor: pointer;
+                "
+              />
             </v-form>
           </span>
         </v-col>
+
+        <!-- أيقونات القائمة -->
         <v-col
           cols="6"
           md="2"
           id="icons"
-          style="display: flex; flex-flow: row; position: relative"
-          ><v-app-bar-nav-icon id="gropicon-text" @click="this.openMune()">
-            <div id="nav-icon-text">
-              <v-icon size="40px" id="gropicon" ripple>mdi-menu</v-icon>
-              <span>menu</span>
-            </div>
+          class="d-flex flex-row align-center justify-end"
+        >
+          <!-- القائمة -->
+          <div id="gropicon-text" @click="openMune()">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png"
+              width="35"
+              height="35"
+            />
+            <span>القائمة</span>
+          </div>
+
+          <!-- السلة -->
+          <div id="gropicon-text" @click="openCart()">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
+              width="35"
+              height="35"
+            />
             <v-badge
-              offset-x="-55"
-              offset-y="-35"
+              offset-x="-8"
+              offset-y="-10"
               color="orange"
               max="5"
-              :content="this.CartProduct.length"
+              :content="CartProduct.length"
             ></v-badge>
-          </v-app-bar-nav-icon>
-          <v-app-bar-nav-icon id="gropicon-text">
-            <div @click="openCart()" id="nav-icon-text">
-              <v-icon size="40px" id="gropicon" ripple>mdi-cart-outline</v-icon
-              ><span>cart</span>
-            </div>
-          </v-app-bar-nav-icon>
-          <v-app-bar-nav-icon id="gropicon-text">
-            <div @click="$router.push({ name: 'listpage' })" id="nav-icon-text">
-              <v-icon size="40px" id="gropicon" ripple>mdi-heart-outline</v-icon
-              ><v-badge
-                offset-x="8"
-                offset-y="-45"
-                color="orange"
-                max="5"
-                :content="this.list.length"
-              ></v-badge>
-              <span><v-text-h6>Lists</v-text-h6></span>
-            </div>
-          </v-app-bar-nav-icon>
+            <span>السلة</span>
+          </div>
+
+          <!-- المفضلة -->
+          <div id="gropicon-text" @click="$router.push({ name: 'listpage' })">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/833/833472.png"
+              width="35"
+              height="35"
+            />
+            <v-badge
+              offset-x="-8"
+              offset-y="-10"
+              color="orange"
+              max="5"
+              :content="list.length"
+            ></v-badge>
+            <span>المفضلة</span>
+          </div>
         </v-col>
       </v-row>
     </v-container>
   </v-app-bar>
 </template>
+
 <script>
 import { CartStore1 } from "@/store/Cart";
 import { ListsStore1 } from "@/store/Lists";
 import { mystore } from "@/store";
 import { mapState, mapActions } from "pinia";
+
 export default {
   data() {
     return {
       drawer: false,
       drawerCart: false,
+      searchvalue: "",
     };
   },
   computed: {
@@ -111,183 +155,67 @@ export default {
     openCart() {
       this.$emit("openCart");
     },
-    openSearch() {
-      this.$emit("openSearch");
-    },
-
-    ...mapActions(mystore, ["getcatigories"]),
   },
   async mounted() {
     await this.getcatigories();
   },
 };
 </script>
-<style lang="css" scoped>
-a {
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
 
-  &.router-link-exact-active {
-    color: orange;
-  }
-}
-
-#link {
-  cursor: pointer;
-}
-#navlistlng {
-  z-index: 5;
-  position: fixed;
-}
-#linkcat {
-  margin-left: 20px;
-}
-#gropicon {
-  margin-left: 6px;
-}
-#headerCart {
-  position: relative;
-  top: 10px;
-  margin-left: 0px;
-  width: 96%;
-  align-items: flex-start;
-  background-color: white;
-}
-#nav-icon-text {
-  display: flex;
-  flex-flow: column;
-}
-#gropicon-text {
-  margin-left: 10px;
-}
+<style scoped>
 #logop {
   background-color: transparent;
-  position: relative;
-  padding: 0px;
   padding-top: 5px;
-  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-#logo {
-  height: fit-content;
-  width: fit-content;
+
+#gropicon-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
   cursor: pointer;
+  transition: 0.3s;
 }
-#catigorylinks {
-  background-color: transparent;
-  overflow: initial;
+#gropicon-text:hover {
+  transform: scale(1.1);
 }
-#row1 {
-  position: relative;
-  top: 10px;
+span {
+  font-size: 13px;
+  color: #333;
 }
-#nav1 {
-  display: none;
-}
-/*/desktop/*/
-@media (max-width: 1366px) {
-}
-/*/tablet/*/
 @media (max-width: 991px) {
-  #nav1 {
-    position: relative;
-    left: -1000px;
-    display: flex;
-  }
-  #nav-icon-text {
-    display: flex;
-    flex-flow: column;
-  }
-  #gropicon-text {
-    position: relative;
-    left: -60px;
-  }
-  #logop {
-    background-color: transparent;
-    position: relative;
-    padding: 0px;
-
-    padding-top: 5px;
-  }
-  #logo {
-    height: fit-content;
-    width: fit-content;
-  }
-  #catigorylinks {
-    background-color: transparent;
-    overflow: initial;
-  }
-  #row1 {
-    position: relative;
-    top: 10px;
-  }
-  #catigorylinks {
-    position: relative;
-    left: -40px;
-  }
-  #link {
-    left: 80px;
-    position: relative;
-  }
-
-  #logop {
-    background-color: transparent;
-    position: relative;
-    left: -10px;
-    width: 195px;
-  }
-  #langhelp {
-    display: flex;
-    flex-flow: row-reverse;
-    margin-left: -70px;
-    position: relative;
-    top: 15px;
-    gap: 10px;
-  }
-  #icons {
-    left: 250px;
-  }
-  #gropiconsearch {
+  #searshcol {
     display: none;
   }
-  .gropicon-textsearch {
-    display: hidden;
-  }
-  #iconsearch {
+  #logop {
+    background-color: transparent;
+    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     position: relative;
-    left: 80px;
-    top: 20px;
-    z-index: 2;
-    flex-flow: row-reverse;
-  }
-  input {
-    height: 50px;
     width: 200px;
-    top: 8px;
-    border-radius: 30px;
-    padding-left: 15px;
-    position: relative;
+    left: -40px;
   }
 }
 /*/mobile/*/
 @media (max-width: 500px) {
   #logop {
     background-color: transparent;
+    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     position: relative;
-    left: -40px;
-    width: 193px;
+    width: 190px;
+    left: -35px;
   }
   #icons {
-    left: 4rem;
-  }
-  #searshcol {
-    display: none;
-  }
-  #gropiconsearch {
-    display: flex;
-  }
-  #nav1 {
-    display: flex;
+    position: relative;
+    left: 20px;
   }
 }
 </style>

@@ -1,180 +1,287 @@
 <template>
-  <div id="foot" style="background-color: gainsboro; position: relative">
-    <v-row>
-      <v-col cols="3" style="gap: 10px" class="d-flex flex-column"
-        ><span class="text-h4"><h4 id="tital">SHOP</h4></span>
+  <footer class="footer" dir="rtl">
+    <v-container>
+      <v-row class="footer-top">
+        <!-- الأقسام -->
+        <v-col cols="12" sm="3" class="footer-col">
+          <h4 class="footer-title">الأقسام</h4>
+          <ul class="footer-list">
+            <li v-for="(item, i) in page.slice(0, 5)" :key="i">
+              <router-link
+                :to="{ name: 'catigoryPage', params: { catigory: item.slug } }"
+              >
+                {{ item.slug }}</router-link
+              >
+            </li>
+          </ul>
+        </v-col>
 
-        <span id="item">Electronics</span>
-        <span id="item">computers & Labs </span>
-        <span id="item">Smartphones</span>
-        <span id="item">Home Furniture</span>
-        <span id="item">weekly special</span>
-      </v-col>
-      <v-col style="gap: 10px" class="d-flex flex-column" cols="3">
-        <span class="text-h4"><h4 id="tital">FURTHER INFO</h4></span>
+        <!-- معلومات إضافية -->
+        <v-col cols="12" sm="3" class="footer-col">
+          <h4 class="footer-title">معلومات إضافية</h4>
+          <ul class="footer-list">
+            <li><router-link to="/aboutus">من نحن</router-link></li>
+            <li>
+              <router-link to="/customer-service">خدمة العملاء</router-link>
+            </li>
+            <li>
+              <router-link to="/shipping-policy"
+                >سياسة الشحن والإرجاع</router-link
+              >
+            </li>
+            <li>
+              <router-link to="/privacy-policy">سياسة الخصوصية</router-link>
+            </li>
+            <li><router-link to="/terms">الشروط والأحكام</router-link></li>
+          </ul>
+        </v-col>
 
-        <span id="item">About</span>
-        <span id="item">Customer Service</span>
-        <span id="item">Reward Program</span>
-        <span id="item">Shipping & Returns</span>
-        <span id="item">Privacy Policy</span>
-        <span id="item">Terms & Conditions</span>
-        <span id="item">Blog</span>
-      </v-col>
-      <v-col sm="3" style="gap: 10px" class="d-flex flex-column" cols="3">
-        <span class="text-h4"><h4 id="tital">SERVICE</h4></span>
+        <!-- خدماتنا -->
+        <v-col cols="12" sm="3" class="footer-col">
+          <h4 class="footer-title">خدماتنا</h4>
+          <ul class="footer-list">
+            <li>
+              <router-link disable to="/supplier-register"
+                >تسجيل الموردين</router-link
+              >
+            </li>
+            <li>
+              <router-link disable to="/wholesale-orders"
+                >الطلبات بالجملة</router-link
+              >
+            </li>
+            <li><router-link to="/inquiries">الاستفسارات</router-link></li>
+            <li><router-link to="/faq">الأسئلة الشائعة</router-link></li>
+            <li><router-link to="/contact">اتصل بنا</router-link></li>
+          </ul>
+        </v-col>
 
-        <span id="item">Search Terms</span>
-        <span id="item">Advanced Search</span>
-        <span id="item">Contact us</span>
-        <span id="item">Theme FAQs</span>
-        <span id="item">Consultant</span>
-        <span id="item">Store Locations</span>
-      </v-col>
-      <v-col sm="3" style="gap: 10px" class="d-flex flex-column" cols="3">
-        <span id="logo" class="text-h4"
-          ><img src="@/assets/images/footer-logo.webp"
-        /></span>
-
-        <span
-          ><v-icon>mdi-map-marker</v-icon> 685 Market Street San Francisco, CA
-          94105. US</span
-        >
-        <span><v-icon>mdi-phone</v-icon>Call us at (415) 555-5555</span>
-
-        <span>
-          <br />
-        </span>
-        <v-row id="links" style="">
+        <!-- معلومات التواصل -->
+        <v-col>
           <v-icon
-            style="
-              height: 50px;
-              width: 50px;
-              border-radius: 30px;
-              background-color: black;
-              color: white;
-            "
-            >mdi-facebook</v-icon
+            class="footer-logo"
+            size="36"
+            color="#c79a00"
+            style="margin-left: 8px"
           >
-          <v-icon
+            mdi-package-variant-closed
+          </v-icon>
+          <h2
             style="
-              height: 50px;
-              width: 50px;
-              border-radius: 30px;
-              background-color: black;
-              color: white;
+              font-family: 'Cairo', sans-serif;
+              color: #c79a00;
+              font-weight: 800;
+              font-size: 24px;
+              margin: 0;
             "
-            >mdi-instagram</v-icon
+            class="site-name"
           >
-          <v-icon
-            style="
-              height: 50px;
-              width: 50px;
-              border-radius: 30px;
-              background-color: black;
-              color: white;
-            "
-            >mdi-twitter</v-icon
-          >
-        </v-row>
-      </v-col>
-    </v-row>
+            {{ settings.site_name }}
+          </h2>
+          <p>
+            <v-icon>mdi-map-marker</v-icon
+            >{{ settings.location || "شارع النصر، القاهرة، مصر" }}
+          </p>
+          <p><v-icon>mdi-phone</v-icon> {{ settings.phone1 }}</p>
+          <div class="social-links">
+            <a :href="settings.facebook"
+              ><v-icon class="social">mdi-facebook</v-icon></a
+            >
+            <a :href="settings.instgrame"
+              ><v-icon class="social">mdi-instagram</v-icon></a
+            >
+            <a :href="settings.whatsApp"
+              ><v-icon class="social">mdi-whatsapp</v-icon></a
+            >
+          </div>
+        </v-col>
+      </v-row>
 
-    <v-row>
-      <v-col cols="12"> </v-col>
-    </v-row>
-    <v-row style="background-color: white">
-      <v-col
-        cols="6"
-        sm="6"
-        style="display: flex; justify-content: flex-start; align-items: center"
-      >
-        <span style="position: relative; left: 10px"
-          ><h6>
-            @ 2025 Ella Demo All Rights Reserved.Powered By Eihap karam
-          </h6></span
-        >
-      </v-col>
-      <v-col
-        cols="6"
-        id="payway"
-        sm="6"
-        style="display: flex; justify-content: flex-end"
-        ><img
-          style="width: 60px; height: 50px"
-          src="@/assets/SVGS/paypal.svg"
-        />
-        <img
-          style="width: 60px; height: 50px"
-          src="@/assets/SVGS/mastercard.svg"
-        />
-        <img
-          style="width: 60px; height: 50px"
-          src="@/assets/SVGS/american-express.svg"
-        />
-        <img style="width: 60px; height: 50px" src="@/assets/SVGS/visa.svg" />
-        <img style="width: 60px; height: 50px" src="@/assets/SVGS/pay.svg" />
-        <img
-          style="width: 60px; height: 50px"
-          src="@/assets/SVGS/discover.svg"
-        />
-      </v-col>
-    </v-row>
-  </div>
+      <v-divider></v-divider>
+
+      <!-- الأسفل -->
+      <v-row class="footer-bottom">
+        <v-col cols="12" sm="6" class="text-right">
+          <small>
+            © 2025 <strong>{{ settings.site_name }}</strong> - جميع الحقوق
+            محفوظة.
+            <br />
+            تصميم وتطوير بواسطة <strong>Eihap Karam</strong>
+          </small>
+        </v-col>
+
+        <v-col cols="12" sm="6" class="text-left payment-icons">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+            alt="Visa"
+            title="بطاقة فيزا"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+            alt="MasterCard"
+            title="ماستر كارد"
+          />
+          <img
+            src="/src/assets/pngaaa.com-3078140.png"
+            alt="Vodafone Cash"
+            title="فودافون كاش"
+          />
+          <img
+            src="/src/assets/wallet.png"
+            alt="محافظ إلكترونية"
+            title="محافظ إلكترونية أخرى"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+  </footer>
 </template>
 
 <script>
-export default {};
+import { mystore } from "@/store";
+import { mapActions, mapState } from "pinia";
+export default {
+  computed: {
+    ...mapState(mystore, ["page", "domin", "settings"]),
+  },
+  methods: {
+    ...mapActions(mystore, ["Pages", "siteinformition"]),
+  },
+  async mounted() {
+    await this.Pages();
+    await this.siteinformition();
+  },
+};
 </script>
 
-<style lang="css" scoped>
-#item {
-  opacity: 0.6;
-  cursor: pointer;
+<style scoped>
+.footer {
+  background: linear-gradient(to top, #f9fbf6, #edf5e8);
+  padding: 50px 0 0;
+  font-family: "Cairo", sans-serif;
+  color: #2f2f2f;
 }
-#tital {
-  font-size: large;
-  font-weight: 500px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+.footer-top {
+  margin-bottom: 30px;
 }
-#foot {
-  padding-right: 15px;
+
+.footer-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a6f28;
+  margin-bottom: 12px;
   position: relative;
-  margin-top: 15px;
-  width: 100%;
 }
-#links {
-  position: relative;
-  left: -10px;
-  gap: 5px;
+.footer-title::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  width: 60px;
+  height: 3px;
+  background: #a6ce39;
+  border-radius: 2px;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-list li {
+  margin-bottom: 8px;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+.footer-list li:hover {
+  opacity: 1;
+  color: #5c9e1f;
+  transform: translateX(-5px);
+}
+
+.footer-list li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-logo {
+  width: 120px;
+  margin-bottom: 5px;
+  filter: brightness(1.1);
+}
+.site-name {
+  font-size: 22px;
+  color: #4f7d2b;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.footer-contact p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+.social-links {
   display: flex;
   justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
 }
-/*/mobile/*/
-@media (max-width: 500px) {
-  #foot {
-    padding-right: 10px;
-    width: 100%;
-    top: 0px;
+.social {
+  background: #5a7c2f;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.social:hover {
+  background: #8fc13a;
+  transform: scale(1.15);
+}
+
+.footer-bottom {
+  background: #fff;
+  padding: 15px 0;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #d9e8d0;
+}
+.footer-bottom small {
+  color: #555;
+  line-height: 1.5;
+}
+.payment-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: center;
+}
+.payment-icons img {
+  width: 55px;
+  height: 35px;
+  object-fit: contain;
+  transition: 0.3s;
+  filter: grayscale(40%);
+}
+.payment-icons img:hover {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .footer-top {
+    text-align: center;
   }
-  #logo {
-    position: absolute;
-    top: 600px;
-    left: 10px;
-    width: 100px;
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
   }
-  #links {
-    display: flex;
-    flex-flow: row, nowrap;
-    position: relative;
-    width: 200px;
-    top: 120px;
-    left: -100px;
-  }
-  #payway {
-    position: relative;
-    top: 50px;
+  .payment-icons {
+    justify-content: center;
+    margin-top: 10px;
   }
 }
 </style>

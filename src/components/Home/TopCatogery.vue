@@ -1,208 +1,254 @@
 <template>
-  <div>
-    <v-container id="topcato">
-      <span class="text-h4">TopCatogery</span>
-      <br />
-      <v-banner id="bann" style="position: relative">
-        <v-row class="d-flex justfiy-center align-center">
-          <div id="catgoryitem" v-for="(item, i) in this.catogory" :key="i">
-            <div
-              class="d-flex flex-column align-center justfiy-center ml-5"
-              style="
-                border-radius: 200px;
-                height: 160px;
-                width: 160px;
-                text-align: center;
-              "
-            >
-              <img
-                @click="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: item.url },
-                  })
-                "
-                id="image"
-                style="
-                  cursor: pointer;
-                  background-color: rgb(241, 240, 240);
-                  height: 160px;
-                  width: 160px;
-                  object-fit: cover;
-                  border-radius: 200px;
-                  position: relative;
-                  top: 10px;
-                "
-                :src="item.img"
-              />
+  <div class="categories-slider">
+    <v-container>
+      <h2 class="section-title">منتجات مميزة</h2>
+      <swiper
+        :centeredSlides="false"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
+        }"
+        :slides-per-view="3"
+        :spaceBetween="20"
+        :modules="modules"
+        :loop="true"
+        :breakpoints="{
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          768: { slidesPerView: 2, spaceBetween: 15 },
+          1024: { slidesPerView: 3, spaceBetween: 20 },
+        }"
+      >
+        <swiper-slide v-for="(item, i) in catigoryProducts1" :key="i">
+          <div class="category-card">
+            <div class="card-horizontal">
+              <div class="image-wrapper">
+                <img :src="domin + item.img" :alt="item.name" />
+              </div>
+              <div class="info">
+                <span class="category-name">{{ item.titel }}</span>
+                <span class="category-price">{{ item.price }} ج.م</span>
+                <v-btn
+                  class="category-price"
+                  @click="(item.quantity = 1), funvaled(item)"
+                  >اضف للعربة</v-btn
+                >
+              </div>
             </div>
-            <br />
-            <span>{{ item.name }}</span>
           </div>
-        </v-row>
-      </v-banner>
+        </swiper-slide>
+      </swiper>
     </v-container>
   </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
+import { CartStore1 } from "@/store/Cart";
+import { mapActions, mapState } from "pinia";
+import { mystore } from "@/store";
 export default {
+  components: { Swiper, SwiperSlide },
+  inject: ["Emitter"],
   data() {
-    return {
-      liks: [
-        "beauty",
-        "fragrances",
-        "furniture",
-        "groceries",
-        "home-decoration",
-        "kitchen-accessories",
-        "laptops",
-        "mens-shirts",
-        "mens-shoes",
-        "mens-watches",
-        "mobile-accessories",
-        "motorcycle",
-        "skin-care",
-        "smartphones",
-        "sports-accessories",
-        "sunglasses",
-        "tablets",
-        "tops",
-        "vehicle",
-        "womens-bags",
-        "womens-dresses",
-        "womens-jewellery",
-        "womens-shoes",
-        "womens-watches",
-      ],
-      catogory: [
-        {
-          name: "Mobile Phones",
-          img: "https://new-ella-demo.myshopify.com/cdn/shop/files/mobile-phones.png?v=10616357514144629263",
-          url: "smartphones",
-        },
-        {
-          name: "Labtops",
-          img: "https://new-ella-demo.myshopify.com/cdn/shop/files/laptops-tablets.png?v=17546078654541140209",
-          url: "laptops",
-        },
-        {
-          name: "motorcycle",
-          img: "https://cdn.dummyjson.com/products/images/motorcycle/Generic%20Motorcycle/thumbnail.png",
-          url: "motorcycle",
-        },
-        {
-          name: "sports",
-          img: "https://cdn.dummyjson.com/products/images/sports-accessories/Football/thumbnail.png",
-          url: "sports-accessories",
-        },
-        {
-          name: "skin-care",
-          img: "https://cdn.dummyjson.com/products/images/skin-care/Attitude%20Super%20Leaves%20Hand%20Soap/thumbnail.png",
-          url: "skin-care",
-        },
-        {
-          name: "sunglasses",
-          img: "https://cdn.dummyjson.com/products/images/sunglasses/Green%20and%20Black%20Glasses/thumbnail.png",
-          url: "sunglasses",
-        },
-        {
-          name: "tablets",
-          img: "https://cdn.dummyjson.com/products/images/tablets/Samsung%20Galaxy%20Tab%20S8%20Plus%20Grey/thumbnail.png",
-          url: "tablets",
-        },
-        {
-          name: "dresses",
-          img: "https://cdn.dummyjson.com/products/images/womens-dresses/Black%20Women's%20Gown/thumbnail.png",
-          url: "womens-dresses",
-        },
-        {
-          name: "womens-shoes",
-          img: "https://cdn.dummyjson.com/products/images/womens-shoes/Red%20Shoes/thumbnail.png",
-          url: "womens-shoes",
-        },
-        {
-          name: "mens-shoes",
-          img: "https://cdn.dummyjson.com/products/images/mens-shoes/Sports%20Sneakers%20Off%20White%20&%20Red/thumbnail.png",
-          url: "mens-shoes",
-        },
-        {
-          name: "kitchen",
-          img: "https://cdn.dummyjson.com/products/images/kitchen-accessories/Boxed%20Blender/thumbnail.png",
-          url: "kitchen-accessories",
-        },
-        {
-          name: "Accessories",
-          img: "https://new-ella-demo.myshopify.com/cdn/shop/files/accessories.png?v=16090558546215869367",
-          url: "mobile-accessories",
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(mystore, ["catigoryProducts1", "domin"]),
+    ...mapState(CartStore1, ["CartProduct2"]),
+  },
+  methods: {
+    ...mapActions(mystore, ["getCatigoryProduct1"]),
+    ...mapActions(CartStore1, ["Additem", "Additem2", "GetCart"]),
+    async Add(pro) {
+      if (localStorage.getItem("token")) {
+        await this.Additem2(pro);
+        await this.Additem(pro);
+        await this.GetCart();
+      }
+    },
+    funvaled(pro) {
+      if (localStorage.getItem("token")) {
+        this.Add(pro);
+      } else {
+        let textem = "عشان تضيف منتج  ف العربة لازم تسجل دخول الأول";
+        this.Emitter.emit("sin", textem);
+      }
+    },
+    goToCategory(id) {
+      this.$router.push({ name: "derilse", params: { idparam: id } });
+    },
+  },
+  async mounted() {
+    await this.getCatigoryProduct1("مميز");
+  },
+  setup() {
+    return { modules: [Autoplay] };
   },
 };
 </script>
-<style lang="css" scoped>
-#image:hover {
-  scale: 1.1;
-  transition: all, 2s;
+
+<style scoped>
+.categories-slider {
+  direction: rtl; /* اتجاه عربي */
+  background-color: #f4f4f4;
+  padding: 2rem 0;
 }
-#topcato {
-  margin-inline: auto;
-  position: relative;
+
+.section-title {
+  color: #c79a00;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #c79a00;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-horizontal {
   display: flex;
-  flex-flow: column;
+  flex-direction: row-reverse; /* الصورة على اليمين */
   align-items: center;
+  gap: 1rem;
+}
+
+.image-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+
+.image-wrapper img {
+  width: fit-content;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.image-wrapper img:hover {
+}
+
+.info {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
-#bann {
-  left: 40px;
-  position: relative;
-  width: 100%;
+
+.category-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
 }
-/*/desktop/*/
-@media (max-width: 1366px) {
+
+.category-price {
+  font-weight: bold;
+  color: #c79a00;
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
 }
-/*/tablet/*/
-@media (max-width: 991px) {
-  #bann {
-    position: relative;
-    align-self: center;
-    width: 75%;
-    left: 0px;
+
+@media (max-width: 768px) {
+  .card-horizontal {
+    flex-direction: column-reverse;
+    text-align: center;
   }
-  #swip {
-    margin-left: 5px;
+  .image-wrapper {
+    width: 100px;
+    height: 100px;
   }
-  .mySwiper {
-    padding: 5px;
+  .categories-slider {
+    direction: rtl; /* اتجاه عربي */
+    background-color: #f4f4f4;
+    padding: 2rem 0;
   }
-  #card {
-    width: 18rem;
+
+  .section-title {
+    color: #c79a00;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #c79a00;
+    display: inline-block;
+    padding-bottom: 0.3rem;
   }
-}
-/*/mobile/*/
-@media (max-width: 500px) {
-  #bann {
-    position: relative;
-    align-self: center;
-    width: 100%;
-    left: 0px;
+
+  .category-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  #swip {
-    border: 2px solid red;
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   }
-  .mySwiper {
-    padding: 1rem;
-    margin: 0rem;
+
+  .card-horizontal {
+    display: flex;
+    flex-direction: row-reverse; /* الصورة على اليمين */
+    align-items: center;
+    gap: 1rem;
   }
-  #card {
-    width: 20rem;
-    border: 2px solid blue;
-    margin: auto;
+
+  .image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #fafafa;
   }
-  #catgoryitem {
-    position: relative;
-    margin-inline: auto;
+
+  .image-wrapper img {
+    width: fit-content;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .image-wrapper img:hover {
+  }
+
+  .info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .category-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  .category-price {
+    font-weight: bold;
+    color: #c79a00;
+    margin-top: 0.3rem;
+    font-size: 0.95rem;
   }
 }
 </style>

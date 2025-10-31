@@ -15,236 +15,21 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide
-        ><img id="item" src="@/assets/images/offers.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">Special offer</h3>
-            <h5 class="subtitel">Buy everything</h5>
-            <p class="discr">
-              Buy everything you need from ellamart+ and get a 30% discount
-            </p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'home',
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/getphone2.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">Get youer new phone</h3>
-            <h5 class="subtitel">At a discounted price now</h5>
-            <p class="discr">Get the latest smartphones from ella</p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'smartphones' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/care.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">care products</h3>
-            <h5 class="subtitel">get it now</h5>
-            <p class="discr">All care products For hair and skin</p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'skin-care' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/dreas2.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">Fashionable clothes</h3>
-            <h5 class="subtitel">Wear the latest fashions Now</h5>
-            <p class="discr">Wear the latest fashions from ella</p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'womens-dresses' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/smart.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">Accessories</h3>
-            <h5 class="subtitel">All smart accessories</h5>
-            <p class="discr">Get all your accessories from ella mart+ now</p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'mobile-accessories' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/sportstool.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">sports equipment</h3>
-            <h5 class="subtitel">sport</h5>
-            <p class="discr">
-              You can find all the sports equipment you need at ella
-            </p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'sports-accessories' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide
-        ><img id="item" src="@/assets/images/mackup.png" />
-        <div class="condis" id="con">
-          <div class="content">
-            <h3 class="title">makeup and cosmetics</h3>
-            <h5 class="subtitel">makeup</h5>
-            <p class="discr">All cosmetics, makeup and others, now on ella</p>
-
-            <div
-              class="progress"
-              role="progressbar"
-              aria-label="Basic example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div
-                @click.prevent="
-                  this.$router.push({
-                    name: 'catigory',
-                    params: { catigory: 'beauty' },
-                  })
-                "
-                class="progress-bar"
-              >
-                <span id="textbtn"><v-icon>mdi-cart</v-icon>Buy Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <swiper-slide v-for="(item, i) in offers" :key="i"
+        ><img id="item" :src="domin + item.banner" />
       </swiper-slide>
     </swiper>
   </div>
 </template>
+
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
-
+import { mystore } from "@/store";
+import { mapState, mapActions } from "pinia";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import required modules
@@ -280,7 +65,8 @@ export default {
     };
   },
   props: ["st"],
-  mounted: function () {
+  mounted: async function () {
+    await this.Offers();
     window.setTimeout(function () {
       window.setInterval(function () {
         let mu = $(".swiper-slide-active");
@@ -291,7 +77,11 @@ export default {
       }, 3000);
     }, 1000);
   },
+  computed: {
+    ...mapState(mystore, ["offers", "domin"]),
+  },
   methods: {
+    ...mapActions(mystore, ["Offers"]),
     async trialasync(id) {
       await this.trialmovis(id);
       this.$router.push({ name: "about", params: { filmid: id } });
@@ -375,6 +165,83 @@ export default {
 };
 </script>
 <style scoped>
+/* ===================== RTL + النص فوق البنر للعروض الغذائية ===================== */
+#conb,
+.swiper,
+.swiper-slide,
+.condis,
+.content {
+  direction: rtl;
+  text-align: right;
+  font-family: "Cairo", sans-serif; /* خط عربي مناسب */
+}
+
+/* صندوق النصوص فوق البانر */
+.condis {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  left: 15px;
+  width: auto;
+  max-width: calc(100% - 30px);
+  background: rgba(255, 255, 255, 0.85); /* خلفية فاتحة شفافة */
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: #333;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* عرض المحتوى عند الشريحة النشطة */
+.swiper-slide-active .condis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* تحسين شكل النصوص */
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #e74c3c; /* لون أحمر جذاب للعروض */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitel {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #27ae60; /* لون أخضر للخصم أو السعر */
+  font-weight: 600;
+}
+
+.discr {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* زر الشراء */
+#textbtn {
+  right: 0;
+  left: auto;
+  padding: 8px 14px;
+  border-radius: 40px;
+  background-color: #ff9d00; /* برتقالي جذاب للطعام */
+  color: #fff;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+#textbtn :hover {
+  width: 400px;
+}
 .contianer-fliud {
   display: flex;
   flex-flow: column;
@@ -404,18 +271,8 @@ export default {
   border-radius: 2px;
   padding: 5px;
 }
-#textbtn {
-  z-index: 5;
-  color: brown;
-  width: 100px;
-  position: fixed;
-  display: flex;
-  position: relative;
-  left: 108px;
-  flex-flow: row, nowrap;
-}
 #textbtn:hover {
-  transform: scale(1.1);
+  transform: scale(0.9);
   transition: all, 1s;
 }
 .checked {
@@ -445,10 +302,7 @@ export default {
 .swiper-slide-active {
   color: aliceblue;
 }
-.mySwiper {
-  position: relative;
-  top: -100px;
-}
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -464,7 +318,7 @@ export default {
 .swiper-slide #item {
   display: block;
   width: 100%;
-  height: 660px;
+  height: fit-content;
   object-fit: cover;
   gap: 100rem;
   border-radius: 5px;
@@ -476,7 +330,6 @@ export default {
 .btn1 {
   width: 50px;
   height: 50px;
-  display: ;
   cursor: pointer;
   border: 2px solid orange;
   border-radius: 50%;
@@ -537,6 +390,7 @@ export default {
   height: 100%;
   width: 290px;
 }
+
 .btn5 {
   width: 50px;
   height: 50px;
@@ -556,17 +410,47 @@ export default {
 }
 /*/desktop/*/
 @media (max-width: 1366px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
   #conb {
     height: fit-content;
-    margin-top: -100px;
     position: relative;
+    top: 0px;
+  }
+  .mySwiper {
+    position: relative;
+    margin-bottom: 0px;
+    padding: 0px;
   }
 }
 /*/tablet/*/
 @media (max-width: 991px) {
+  .condis {
+    top: 12px;
+    right: 10px;
+    left: 10px;
+    padding: 12px 15px;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .subtitel {
+    font-size: 0.95rem;
+  }
+  .discr {
+    font-size: 0.85rem;
+  }
+  .mySwiper {
+    position: relative;
+    top: 0px;
+    margin-bottom: 0px;
+  }
   #conb {
     height: fit-content;
-    margin-top: -160px;
+    width: 99%;
+    top: 0px;
     position: relative;
   }
   .swiper-slide #item {
@@ -583,12 +467,32 @@ export default {
     position: fixed;
     display: flex;
     position: relative;
-    left: 30px;
+    left: -50px;
     flex-flow: row, nowrap;
   }
 }
 /*/mobile/*/
 @media (max-width: 500px) {
+  .condis {
+    top: -15px;
+    right: 5px;
+    left: 5px;
+    padding: 10px 12px;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+  .subtitel {
+    font-size: 0.8rem;
+  }
+  .discr {
+    font-size: 0.75rem;
+  }
+  .mySwiper {
+    position: relative;
+    margin: 0px;
+    top: 0px;
+  }
   .swiper-slide #item {
     display: block;
     width: 100%;
@@ -601,8 +505,23 @@ export default {
   }
   #conb {
     height: fit-content;
-    margin-top: -160px;
+    width: 99%;
+    left: 0px;
+    top: 0px;
     position: relative;
+  }
+  .discr {
+    width: 200px;
+    position: relative;
+    left: -100px;
+  }
+
+  /* ✅ منع الانزياح الأفقي في أي مقاس */
+  html,
+  body {
+    overflow-x: hidden;
+    padding: auto;
+    margin: auto;
   }
 }
 </style>
